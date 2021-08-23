@@ -30,7 +30,7 @@ var timerInterval = null;
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const countdowntime = urlParams.get('countdowntime')
-    if (typeof countdowntime === undefined || countdowntime === null) 
+    if (typeof countdowntime === 'undefined' || countdowntime === null) 
     {
         launchHostSetup();
     }
@@ -162,11 +162,28 @@ function setDisabled(button) {
 function removeDisabled(button) {
   button.removeAttribute("disabled");
 }
+
+function repeatPlayAudio(counter) {    
+    var bipAudioPlayer = document.getElementById("bipAudio")
+
+    const customPlay = function() {      
+        bipAudioPlayer.play();
+      counter--;
+      
+      if (counter === 0) {
+        bipAudioPlayer.removeEventListener('ended', customPlay);
+      }
+    };
+    
+    bipAudioPlayer.addEventListener('ended', customPlay);
+    
+    bipAudioPlayer.currentTime = 0;
+    bipAudioPlayer.loop = false;    
+    customPlay();
+}
+
 function timeIsUp() {
-    var bipAudio = document.getElementById("bipAudio")
-    bipAudio.play();
-    bipAudio.play();
-    bipAudio.play();
+    repeatPlayAudio(3);
     setDisabled(startBtn);
     removeDisabled(stopBtn);
     clearInterval(timerInterval);
@@ -218,7 +235,7 @@ function setCircleDasharray() {
 
 var app = null;
 
-if (typeof window.Webex === undefined || window.Webex === null)
+if (typeof window.Webex === 'undefined' || window.Webex === null)
 {
     
 } 
