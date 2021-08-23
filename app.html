@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="app">
+          <div class="base-timer" id="countdownRunner">
+            <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <g class="base-timer__circle">
+                <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+                <path id="base-timer-path-remaining" stroke-dasharray="283" class="base-timer__path-remaining arc"
+                      d="
+                         M 50, 50
+                         m -45, 0
+                         a 45,45 0 1,0 90,0
+                         a 45,45 0 1,0 -90,0
+                         "></path>
+              </g>
+            </svg>
+            <span id="base-timer-label" class="base-timer__label"></span>
+          </div>
+          <div id="countdownValue">
+            <svg xmlns="http://www.w3.org/2000/svg" >
+                <g>
+                    <rect x="20" y="0" width="100" height="100" fill="rgb(240,240,240)"></rect>
+                    <text x="35" y="25" font-family="Verdana" font-size="12" fill="rgb(0,0,0)">Min</text>
+                    <text id="countdownMins" x="42" y="70" font-family="Verdana" font-size="38" fill="rgb(0,0,0)">00</text>
+                    <circle cx="145" cy="40" r="2" fill="rgb(0,0,0)"></circle>
+                    <circle cx="145" cy="60" r="2" fill="rgb(0,0,0)"></circle>
+                    <rect x="170" y="0" width="100" height="100" fill="rgb(240,240,240)"></rect>
+                    <text x="205" y="20" font-family="Verdana" font-size="12" fill="rgb(0,0,0)">Sec</text>
+                    <text id="countdownSeconds" x="192" y="70" font-family="Verdana" font-size="38" fill="rgb(0,0,0)">00</text>
+                </g>
+            </svg>
+          </div>
+        </div>
+
+        <div>
+            <p id="countdownRunnerLabel">Host started a countdown timer</p>
+        </div>
+        <div class="options" id="countdownSettings">
+            <p>Please select Countdown time:</p>
+            <input type="radio" id="time0" name="time" onclick="set1Min()">
+            <label for="time1">1 Min</label><br>
+            <input type="radio" id="time1" name="time" onclick="set5Min()">
+            <label for="time1">5 Min</label><br>
+            <input type="radio" id="time2" name="time" onclick="set10Min()">
+            <label for="time2">10 Min</label><br>  
+            <input type="radio" id="time3" name="time" onclick="set15Min()">
+            <label for="time3">15 Min</label><br><br>
+        </div>
+      
+        <div class="buttons" id="countdownControl">
+          <button onclick="start()" class="start">
+            Start
+          </button>
+          <button onclick="stop()" class="stop">
+            Stop
+          </button>
+          <button onclick="reset()" class="reset">
+            Reset
+          </button>
+        </div>
+      
+        <script src="app.js"></script>
+      </body>
+
+</html>
+
+  

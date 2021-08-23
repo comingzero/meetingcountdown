@@ -1,0 +1,90 @@
+body {
+    box-sizing: border-box;
+    font-family: monospace;
+    display: grid;
+    height: 40vh;
+    place-items: center;
+   }
+  
+  .base-timer {
+    position: relative;
+    width: 300px;
+    height: 300px;
+  }
+  
+  /* scaleX(1) = CLOCKWISE, scaleX(-1) = ANTI-CLOCKWISE */
+  .base-timer__svg {
+    transform: scaleX(1);
+  }
+  
+  .base-timer__circle {
+    fill: none;
+    stroke: none;
+  }
+  
+  .base-timer__path-elapsed {
+    stroke-width: 7px;
+    stroke: grey;
+  }
+  
+  .base-timer__path-remaining {
+    stroke-width: 7px;
+    stroke-linecap: round;
+    transform: rotate(90deg);
+    transform-origin: center;
+    transition: 1s linear all;
+    fill-rule: nonzero;
+    stroke: currentColor;
+  }
+  
+  .base-timer__path-remaining.arc {
+    color: rgba(179, 48, 102, 0.973)
+  }
+  
+  .base-timer__label {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+  }
+
+  .options {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  
+  .buttons {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .buttons button {
+    margin: 1rem;
+    border: none;
+    background-color: beige;
+    width: 100px;
+    height: 50px;
+    border-radius: 5px;
+    padding: .3rem;
+    font-size: 1.1rem;
+  }
+  
+  .buttons button:hover {
+    background-color: rgba(179, 48, 102, 0.973);
+    color: white;
+  }
+  
+  .buttons button:disabled {
+    cursor: not-allowed;
+  }
+
+  .buttons button:disabled:hover{
+    background-color:beige;
+  }
+
