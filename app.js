@@ -24,6 +24,7 @@ var TIME_LIMIT = 300; //in seconds
 var timePassed = -1;
 var timeLeft = TIME_LIMIT;
 var timerInterval = null;
+var app = null;
 
 (function initialize(){
 
@@ -208,6 +209,7 @@ function timeIsUp() {
 
 function resetVars() {
     set5Min();
+    app.cleanShareUrl();
     document.getElementById("time1").checked = true;
     removeDisabled(startBtn);
     setDisabled(stopBtn);
@@ -240,8 +242,6 @@ function setCircleDasharray() {
   console.log("setCircleDashArray: ", circleDasharray);
   timer.setAttribute("stroke-dasharray", circleDasharray);
 }
-
-var app = null;
 
 if (typeof window.Webex === 'undefined' || window.Webex === null)
 {
