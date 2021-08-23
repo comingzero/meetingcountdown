@@ -111,7 +111,7 @@ function reset() {
     launchHostSetup();
     clearInterval(timerInterval);
     resetVars();
-    startBtn.innerHTML = "Start";
+    startBtn.innerHTML = "Start & Share";
     timer.setAttribute("stroke-dasharray", RESET_DASH_ARRAY);
 }
 
