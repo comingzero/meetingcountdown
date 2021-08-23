@@ -111,18 +111,20 @@ function reset() {
     launchHostSetup();
     clearInterval(timerInterval);
     resetVars();
-    startBtn.innerHTML = "Start & Share";
+    startBtn.innerHTML = "Start";
     timer.setAttribute("stroke-dasharray", RESET_DASH_ARRAY);
 }
 
 function start(withReset = false) {
-    showHostRunning();
-    setDisabled(startBtn);
-    removeDisabled(stopBtn);
-    if (withReset) {
-        resetVars();
-    }
-    startTimer();
+    onClickSetShareUrl(function(){
+        showHostRunning();
+        setDisabled(startBtn);
+        removeDisabled(stopBtn);
+        if (withReset) {
+            resetVars();
+        }
+        startTimer();
+    });
 }
 
 function stop() {
@@ -208,3 +210,60 @@ function setCircleDasharray() {
   console.log("setCircleDashArray: ", circleDasharray);
   timer.setAttribute("stroke-dasharray", circleDasharray);
 }
+
+var app = null;
+
+if (typeof window.Webex === undefined || window.Webex === null)
+{
+    
+} 
+else
+{
+    app = new window.Webex.Application();
+    app.listen('application:displayContextChanged', function(payload){
+
+    });
+    
+    app.listen('application:shareStateChanged', function(payload){
+    
+    });
+    
+    app.listen('application:themeChanged', function(payload){
+    
+    });
+    
+    app.listen('meeting:infoChanged', function(payload){
+    
+    });
+    
+    app.listen('meeting:roleChanged', function(payload){
+    
+    });
+    
+    app.listen('space:infoChanged', function(payload){
+    
+    });
+}
+
+function onClickSetShareUrl(callback) {
+    if (app === null)
+    {
+        callback();
+        return;
+    }
+    var internalUrl = "https://comingzero.github.io/meetingcountdown?countdowntime=" + TIME_LIMIT;
+    var externalUrl = internalUrl;
+    var title = "Countdown Timer";
+    var opt = {};
+
+    app.setShareUrl(internalUrl, externalUrl, title, opt)
+      .then(function (res) {
+        console.log("Promise setShareUrl success", JSON.stringify(res));
+        print("Promise setShareUrl success", JSON.stringify(res));
+        callback();
+      })
+      .catch(function (reason) {
+        console.error("setShareUrl: fail reason=" + reason);
+        print("setShareUrl: fail reason=" + reason);
+      });
+  }
