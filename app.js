@@ -255,11 +255,11 @@ else
         log("Event application:shareStateChanged isShared=" + isShared);
         if (isShared) 
         {
-            document.getElementById("resetBtn").hidden = true;
+            resetBtn.hidden = true;
         } 
         else
         {
-            document.getElementById("resetBtn").hidden = false;
+            resetBtn.hidden = false;
         }
     });
 }
