@@ -253,21 +253,16 @@ else
     app.onReady().then(() => 
     {
         log('onReady()', {message:'app is ready'});
-        app.listen().then(function () {
-            log("Listen().then() ok");
-            app.on("application:shareStateChanged", function (isShared) {
-                log("Event application:shareStateChanged isShared=" + isShared);
-                if (isShared) 
-                {
-                    resetBtn.hidden = true;
-                } 
-                else
-                {
-                    resetBtn.hidden = false;
-                }
-            });
-        }).catch(function (reason) {
-            log("listen: fail reason=" + reason);
+        app.on("application:shareStateChanged", function (isShared) {
+            log("Event application:shareStateChanged isShared=" + isShared);
+            if (isShared) 
+            {
+                resetBtn.hidden = true;
+            } 
+            else
+            {
+                resetBtn.hidden = false;
+            }
         });
     });
 }
