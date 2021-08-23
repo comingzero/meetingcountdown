@@ -242,30 +242,18 @@ if (typeof window.Webex === 'undefined' || window.Webex === null)
 else
 {
     app = new window.Webex.Application();
-    app.listen('application:displayContextChanged', function(payload){
 
-    });
-    
-    app.listen('application:shareStateChanged', function(payload){
-    
-    });
-    
-    app.listen('application:themeChanged', function(payload){
-    
-    });
-    
-    app.listen('meeting:infoChanged', function(payload){
-    
-    });
-    
-    app.listen('meeting:roleChanged', function(payload){
-    
-    });
-    
-    app.listen('space:infoChanged', function(payload){
-    
-    });
+    app.onReady().then(() => log('onReady()', {message:'app is ready'}));
 }
+
+function log(type, data) {
+    var ul = document.getElementById("console");
+    var li = document.createElement("li");
+    var payload = document.createTextNode(`${type}: ${JSON.stringify(data)}`);
+    li.appendChild(payload)
+    ul.prepend(li);
+  }
+  
 
 function onClickSetShareUrl(callback) {
     if (app === null)
