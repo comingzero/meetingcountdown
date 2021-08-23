@@ -247,11 +247,13 @@ else
 }
 
 function log(type, data) {
+    /*
     var ul = document.getElementById("console");
     var li = document.createElement("li");
     var payload = document.createTextNode(`${type}: ${JSON.stringify(data)}`);
     li.appendChild(payload)
     ul.prepend(li);
+    */
   }
   
 
