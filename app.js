@@ -118,6 +118,7 @@ function set15Min()
 
 function reset() {
     launchHostSetup();
+    app.cleanShareUrl();
     clearInterval(timerInterval);
     resetVars();
     startBtn.innerHTML = "Start";
@@ -209,7 +210,6 @@ function timeIsUp() {
 
 function resetVars() {
     set5Min();
-    app.cleanShareUrl();
     document.getElementById("time1").checked = true;
     removeDisabled(startBtn);
     setDisabled(stopBtn);
