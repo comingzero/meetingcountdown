@@ -41,6 +41,14 @@ var timerInterval = null;
         
 })();
 
+function log(type, data) {
+    var ul = document.getElementById("console");
+    var li = document.createElement("li");
+    var payload = document.createTextNode(`${type}: ${JSON.stringify(data)}`);
+    li.appendChild(payload)
+    ul.prepend(li);
+}
+
 function launchHostSetup()
 {
     console.log("launch host side");
@@ -242,20 +250,19 @@ if (typeof window.Webex === 'undefined' || window.Webex === null)
 else
 {
     app = new window.Webex.Application();
-
     app.onReady().then(() => log('onReady()', {message:'app is ready'}));
+    app.on("application:shareStateChanged", function (isShared) {
+        log("Event application:shareStateChanged isShared=" + isShared);
+        if (isShared) 
+        {
+            document.getElementById("resetBtn").hidden = true;
+        } 
+        else
+        {
+            document.getElementById("resetBtn").hidden = false;
+        }
+    });
 }
-
-function log(type, data) {
-    /*
-    var ul = document.getElementById("console");
-    var li = document.createElement("li");
-    var payload = document.createTextNode(`${type}: ${JSON.stringify(data)}`);
-    li.appendChild(payload)
-    ul.prepend(li);
-    */
-  }
-  
 
 function onClickSetShareUrl(callback) {
     if (app === null)
@@ -263,19 +270,17 @@ function onClickSetShareUrl(callback) {
         callback();
         return;
     }
-    var internalUrl = "https://comingzero.github.io/meetingcountdown?countdowntime=" + TIME_LIMIT;
+    var internalUrl = "https://comingzero.github.io/meetingcountdown?countdowntime=" + timeLeft;
     var externalUrl = internalUrl;
     var title = "Countdown Timer";
     var opt = {};
 
     app.setShareUrl(internalUrl, externalUrl, title, opt)
       .then(function (res) {
-        console.log("Promise setShareUrl success", JSON.stringify(res));
-        print("Promise setShareUrl success", JSON.stringify(res));
+        log("Promise setShareUrl success", JSON.stringify(res));
         callback();
       })
       .catch(function (reason) {
-        console.error("setShareUrl: fail reason=" + reason);
-        print("setShareUrl: fail reason=" + reason);
+        log("setShareUrl: fail reason=" + reason);
       });
   }
