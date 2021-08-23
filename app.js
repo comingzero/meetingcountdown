@@ -163,10 +163,15 @@ function removeDisabled(button) {
   button.removeAttribute("disabled");
 }
 function timeIsUp() {
+    var bipAudio = document.getElementById("bipAudio")
+    bipAudio.play();
+    bipAudio.play();
+    bipAudio.play();
     setDisabled(startBtn);
     removeDisabled(stopBtn);
     clearInterval(timerInterval);
-    reset();
+     
+    //reset();
     /*let confirmReset = confirm("Time is UP! Wanna restart?");
     if (confirmReset) {
         reset();
