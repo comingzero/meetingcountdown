@@ -118,7 +118,13 @@ function set15Min()
 
 function reset() {
     launchHostSetup();
-    app.cleanShareUrl();
+    app.clearShareUrl()
+        .then(function (res) {
+            log("Promise clearShareUrl success");
+        })
+        .catch(function (reason) {
+            log("clearShareUrl: fail reason=" + reason);
+        });
     clearInterval(timerInterval);
     resetVars();
     startBtn.innerHTML = "Start";
