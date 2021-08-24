@@ -259,9 +259,9 @@ else
     app.onReady().then(() => 
     {
         log('onReady()', {message:'app is ready'});
-        app.listen().then(function () {
+        webex.application.listen().then(function () {
             log("Listen().then() ok");
-            app.on("application:shareStateChanged", function (isShared) {
+            webex.application.on("application:shareStateChanged", function (isShared) {
                 log("Event application:shareStateChanged isShared=" + isShared);
                 if (isShared) 
                 {
