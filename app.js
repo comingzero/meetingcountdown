@@ -124,7 +124,7 @@ function reset() {
         })
         .catch(function (reason) {
             log("clearShareUrl: fail reason=" + reason);
-        });
+    });
     clearInterval(timerInterval);
     resetVars();
     startBtn.innerHTML = "Start";
@@ -132,8 +132,8 @@ function reset() {
 }
 
 function start(withReset = false) {
-    setHidden(startBtn);
-    setDisabled(resetBtn);
+    setDisabled(startBtn);
+    setHidden(resetBtn);
     onClickSetShareUrl(function(){
         showHostRunning();
         //setDisabled(startBtn);
@@ -176,11 +176,7 @@ window.addEventListener("load", () => {
 //---------------------------------------------
 
 function setHidden(button, isHide = true) {
-    if (isHide) {
-        button.style.display = "none";
-    } else {
-        button.style.display = "block";
-    }
+    button.hidden = isHide;
 }
 
 function setDisabled(button) {
@@ -212,11 +208,11 @@ function repeatPlayAudio(counter) {
 
 function timeIsUp() {
     repeatPlayAudio(3);
-    setDisabled(startBtn);
     removeDisabled(stopBtn);
     removeDisabled(resetBtn);
     clearInterval(timerInterval);
-     
+    setHidden(resetBtn, false);
+
     //reset();
     /*let confirmReset = confirm("Time is UP! Wanna restart?");
     if (confirmReset) {
@@ -296,7 +292,7 @@ function onClickSetShareUrl(callback) {
         callback();
         return;
     }
-    var internalUrl = "https://comingzero.github.io/meetingcountdown?countdowntime=" + timeLeft;
+    var internalUrl = "https://comingzero.github.io/meetingcountdown?countdowntime=" + TIME_LIMIT;
     var externalUrl = internalUrl;
     var title = "Countdown Timer";
     var opt = {};
