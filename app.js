@@ -30,7 +30,7 @@ var app = null;
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const countdowntime = urlParams.get('countdowntime')
+    const countdowntime = urlParams.get('countdowntime');
     if (typeof countdowntime === 'undefined' || countdowntime === null) 
     {
         launchHostSetup();
@@ -132,9 +132,11 @@ function reset() {
 }
 
 function start(withReset = false) {
+    setHidden(startBtn);
+    setDisabled(resetBtn);
     onClickSetShareUrl(function(){
         showHostRunning();
-        setDisabled(startBtn);
+        //setDisabled(startBtn);
         removeDisabled(stopBtn);
         if (withReset) {
             resetVars();
@@ -157,8 +159,9 @@ function startTimer() {
         timeLabel.innerHTML = formatTime(timeLeft);
         setCircleDasharray();
 
-        if (timeLeft === 0) {
-        timeIsUp();
+        if (timeLeft === 0) 
+        {
+            timeIsUp();
         }
     }, 1000);
 }
@@ -171,6 +174,15 @@ window.addEventListener("load", () => {
 //---------------------------------------------
 //HELPER METHODS
 //---------------------------------------------
+
+function setHidden(button, isHide = true) {
+    if (isHide) {
+        button.style.display = "none";
+    } else {
+        button.style.display = "block";
+    }
+}
+
 function setDisabled(button) {
   button.setAttribute("disabled", "disabled");
 }
@@ -202,6 +214,7 @@ function timeIsUp() {
     repeatPlayAudio(3);
     setDisabled(startBtn);
     removeDisabled(stopBtn);
+    removeDisabled(resetBtn);
     clearInterval(timerInterval);
      
     //reset();
@@ -245,7 +258,6 @@ function setCircleDasharray() {
   const circleDasharray = `${(
     calculateTimeFraction() * FULL_DASH_ARRAY
   ).toFixed(0)} 283`;
-  console.log("setCircleDashArray: ", circleDasharray);
   timer.setAttribute("stroke-dasharray", circleDasharray);
 }
 
@@ -265,11 +277,11 @@ else
                 log("Event application:shareStateChanged isShared=" + isShared);
                 if (isShared) 
                 {
-                    resetBtn.hidden = true;
+                    setHidden(resetBtn, true);
                 } 
                 else
                 {
-                    resetBtn.hidden = false;
+                    setHidden(resetBtn, false);
                 }
             });
         }).catch(function (reason) {
