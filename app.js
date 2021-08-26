@@ -27,18 +27,40 @@ var timerInterval = null;
 var app = null;
 
 (function initialize(){
+    app = new window.Webex.Application();
+    app.onReady().then(() => 
+    {
+        log('onReady()', {message:'app is ready'});
 
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const countdowntime = urlParams.get('countdowntime');
-    if (typeof countdowntime === 'undefined' || countdowntime === null) 
-    {
-        launchHostSetup();
-    }
-    else
-    {
-        launchAttendee(countdowntime);
-    }
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const countdowntime = urlParams.get('countdowntime');
+        if (typeof countdowntime === 'undefined' || countdowntime === null) 
+        {
+            launchHostSetup();
+        }
+        else
+        {
+            launchAttendee(countdowntime);
+        }
+
+        app.listen().then(function () {
+            log("Listen().then() ok");
+            app.on("application:shareStateChanged", function (isShared) {
+                log("Event application:shareStateChanged isShared=" + isShared);
+                if (isShared) 
+                {
+                    startTimer();
+                } 
+                else
+                {
+                    showHostSetup();
+                }
+            });
+        }).catch(function (reason) {
+            log("listen: fail reason=" + reason);
+        });
+    });
         
 })();
 
@@ -260,35 +282,6 @@ function setCircleDasharray() {
     calculateTimeFraction() * FULL_DASH_ARRAY
   ).toFixed(0)} 283`;
   timer.setAttribute("stroke-dasharray", circleDasharray);
-}
-
-if (typeof window.Webex === 'undefined' || window.Webex === null)
-{
-    
-} 
-else
-{
-    app = new window.Webex.Application();
-    app.onReady().then(() => 
-    {
-        log('onReady()', {message:'app is ready'});
-        app.listen().then(function () {
-            log("Listen().then() ok");
-            app.on("application:shareStateChanged", function (isShared) {
-                log("Event application:shareStateChanged isShared=" + isShared);
-                if (isShared) 
-                {
-                    startTimer();
-                } 
-                else
-                {
-                    showHostSetup();
-                }
-            });
-        }).catch(function (reason) {
-            log("listen: fail reason=" + reason);
-        });
-    });
 }
 
 function onClickSetShareUrl(callback) {
