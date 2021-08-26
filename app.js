@@ -127,7 +127,7 @@ function reset() {
     });
     clearInterval(timerInterval);
     resetVars();
-    startBtn.innerHTML = "Start";
+    startBtn.innerHTML = "Launch";
     timer.setAttribute("stroke-dasharray", RESET_DASH_ARRAY);
 }
 
