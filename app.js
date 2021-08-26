@@ -1,11 +1,4 @@
-/*
-This script is an extension to the one written
-by Mateusz Rybczonec on his CSS Tricks Blog
 
-Blog Link: https://bit.ly/3nH3AhO
-
-OG Pen Link : https://bit.ly/3fi7xXj
-*/
 
 const FULL_DASH_ARRAY = 283;
 const RESET_DASH_ARRAY = `-57 ${FULL_DASH_ARRAY}`;
