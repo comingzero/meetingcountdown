@@ -50,6 +50,7 @@ var app = null;
                 log("Event application:shareStateChanged isShared=" + isShared);
                 if (isShared) 
                 {
+                    showHostRunning();
                     startTimer();
                 } 
                 else
