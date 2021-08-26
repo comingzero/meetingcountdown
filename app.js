@@ -56,12 +56,13 @@ function launchHostSetup()
     showHostSetup();
     document.getElementById("time1").checked = true;
     document.getElementById("countdownMins").textContent = '05';    
+    setShareUrl();
 }
 
 function showHostSetup()
 {
     document.getElementById("countdownRunner").hidden = true;
-    document.getElementById("countdownControl").style.display = "block";
+    document.getElementById("countdownControl").style.display = "none";
     document.getElementById("countdownValue").hidden = false;
     document.getElementById("countdownSettings").hidden = false;
     document.getElementById("countdownRunnerLabel").hidden = true;
@@ -71,7 +72,7 @@ function showHostRunning()
 {
     document.getElementById("countdownValue").hidden = true;
     document.getElementById("countdownRunner").hidden = false;
-    document.getElementById("countdownControl").style.display = "block";
+    document.getElementById("countdownControl").style.display = "none";
     document.getElementById("countdownSettings").hidden = true;
     document.getElementById("countdownRunnerLabel").hidden = true;
 }
@@ -93,6 +94,7 @@ function set1Min()
     TIME_LIMIT = 60
     document.getElementById("countdownMins").textContent = '01';
     timeLabel.innerHTML = formatTime(TIME_LIMIT);
+    setShareUrl();
 }
 
 function set5Min()
@@ -100,6 +102,7 @@ function set5Min()
     TIME_LIMIT = 300
     document.getElementById("countdownMins").textContent = '05';
     timeLabel.innerHTML = formatTime(TIME_LIMIT);
+    setShareUrl();
 }
 
 function set10Min()
@@ -107,6 +110,7 @@ function set10Min()
     TIME_LIMIT = 600
     document.getElementById("countdownMins").textContent = '10';
     timeLabel.innerHTML = formatTime(TIME_LIMIT);
+    setShareUrl();
 }
 
 function set15Min()
@@ -114,6 +118,7 @@ function set15Min()
     TIME_LIMIT = 900
     document.getElementById("countdownMins").textContent = '15';
     timeLabel.innerHTML = formatTime(TIME_LIMIT);
+    setShareUrl();
 }
 
 function reset() {
@@ -176,15 +181,15 @@ window.addEventListener("load", () => {
 //---------------------------------------------
 
 function setHidden(button, isHide = true) {
-    button.hidden = isHide;
+    //button.hidden = isHide;
 }
 
 function setDisabled(button) {
-  button.setAttribute("disabled", "disabled");
+  //button.setAttribute("disabled", "disabled");
 }
 
 function removeDisabled(button) {
-  button.removeAttribute("disabled");
+  //button.removeAttribute("disabled");
 }
 
 function repeatPlayAudio(counter) {    
@@ -273,11 +278,11 @@ else
                 log("Event application:shareStateChanged isShared=" + isShared);
                 if (isShared) 
                 {
-                    setHidden(resetBtn, true);
+                    startTimer();
                 } 
                 else
                 {
-                    setHidden(resetBtn, false);
+                    showHostSetup();
                 }
             });
         }).catch(function (reason) {
@@ -292,6 +297,11 @@ function onClickSetShareUrl(callback) {
         callback();
         return;
     }
+    setShareUrl(callback);
+  }
+
+  function setShareUrl() 
+  {
     var internalUrl = "https://comingzero.github.io/meetingcountdown?countdowntime=" + TIME_LIMIT;
     var externalUrl = internalUrl;
     var title = "Countdown Timer";
@@ -300,7 +310,6 @@ function onClickSetShareUrl(callback) {
     app.setShareUrl(internalUrl, externalUrl, title, opt)
       .then(function (res) {
         log("Promise setShareUrl success", JSON.stringify(res));
-        callback();
       })
       .catch(function (reason) {
         log("setShareUrl: fail reason=" + reason);
