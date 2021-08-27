@@ -55,6 +55,7 @@ if (typeof countdowntime === 'undefined' || countdowntime === null)
                 } 
                 else
                 {
+                    clearInterval(timerInterval);
                     resetVars();
                     showHostSetup();
                 }
@@ -233,7 +234,7 @@ function timeIsUp() {
     removeDisabled(resetBtn);
     clearInterval(timerInterval);
     setHidden(resetBtn, false);
-    //reset();
+    reset();
     /*let confirmReset = confirm("Time is UP! Wanna restart?");
     if (confirmReset) {
         reset();
