@@ -1,4 +1,5 @@
 body {
+    padding: 70px;
     box-sizing: border-box;
     font-family: monospace;
     display: grid;

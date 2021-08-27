@@ -23,8 +23,8 @@ var app = null;
     app = new window.Webex.Application();
     app.onReady().then(() => 
     {
+        document.body.hidden = false
         log('onReady()', {message:'app is ready'});
-
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const countdowntime = urlParams.get('countdowntime');
@@ -57,14 +57,6 @@ var app = null;
     });
         
 })();
-
-function log(type, data) {
-    var ul = document.getElementById("console");
-    var li = document.createElement("li");
-    var payload = document.createTextNode(`${type}: ${JSON.stringify(data)}`);
-    li.appendChild(payload)
-    ul.prepend(li);
-}
 
 function launchHostSetup()
 {
@@ -301,4 +293,13 @@ function onClickSetShareUrl(callback) {
       .catch(function (reason) {
         log("setShareUrl: fail reason=" + reason);
       });
+  }
+
+  function log(type, data) {
+      /*
+    var ul = document.getElementById("console");
+    var li = document.createElement("li");
+    var payload = document.createTextNode(`${type}: ${JSON.stringify(data)}`);
+    li.appendChild(payload)
+    ul.prepend(li);*/
   }

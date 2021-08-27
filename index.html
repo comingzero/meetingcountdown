@@ -2,7 +2,7 @@
     <head>
         <link rel="stylesheet" href="style.css">
     </head>
-    <body>
+    <body hidden=true>
         <div id="app">
           <div class="base-timer" id="countdownRunner" hidden=true>
             <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -76,11 +76,12 @@
             <source src="bip1.mp3" type="audio/mpeg">
           </audio>
         </div>
-      
-        <h4>Recent Event Logs</h4>
+      <!--
+        <h4 hidden>Recent Event Logs</h4>
         <div>
           <ul id="console"></ul>
         </div>
+        -->
         <script src="https://binaries.webex.com/preview-webex-jssdk/webex-embedded-app-sdk-master.js"></script>
         <script src="app.js" defer></script>
       </body>
