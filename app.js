@@ -55,7 +55,6 @@ if (typeof countdowntime === 'undefined' || countdowntime === null)
                 } 
                 else
                 {
-                    TIME_LIMIT = 300
                     showHostSetup();
                 }
             });
