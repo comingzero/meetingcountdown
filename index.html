@@ -2,7 +2,7 @@
     <head>
         <link rel="stylesheet" href="style.css">
     </head>
-    <body hidden=true>
+    <body>
         <div id="app">
           <div class="base-timer" id="countdownRunner" hidden=true>
             <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -35,39 +35,41 @@
           </div>
         </div>
 
-        <div>
+        <div id="countdownRunnerControler" hidden=true>
+          <div>
             <p id="countdownRunnerLabel">Host started a countdown timer</p>
-        </div>
-        <div class="options" id="countdownSettings">
-            <p style="font-size:18px;">Please select Countdown time:</p>
-            <label class="container">1 Minute
-              <input type="radio" id="time0" name="time" onclick="set1Min()">
-              <span class="checkmark"></span>
-            </label>
-            <label class="container">5 Minutes
-              <input type="radio" id="time1" name="time" onclick="set5Min()">
-              <span class="checkmark"></span>
-            </label>
-            <label class="container">10 Minutes
-              <input type="radio" id="time2" name="time" onclick="set10Min()">
-              <span class="checkmark"></span>
-            </label>
-            <label class="container">15 Minutes
-              <input type="radio" id="time3" name="time" onclick="set15Min()">
-              <span class="checkmark"></span>
-            </label>
-        </div>
-      
-        <div class="buttons" id="countdownControl">
-          <button onclick="start()" class="start">
-            Launch
-          </button>
-          <button onclick="stop()" class="stop" hidden=true>
-            Stop
-          </button>
-          <button onclick="reset()" class="reset">
-            Reset
-          </button>
+          </div>
+          <div class="options" id="countdownSettings">
+              <p style="font-size:18px;">Please select Countdown time:</p>
+              <label class="container">1 Minute
+                <input type="radio" id="time0" name="time" onclick="set1Min()">
+                <span class="checkmark"></span>
+              </label>
+              <label class="container">5 Minutes
+                <input type="radio" id="time1" name="time" onclick="set5Min()">
+                <span class="checkmark"></span>
+              </label>
+              <label class="container">10 Minutes
+                <input type="radio" id="time2" name="time" onclick="set10Min()">
+                <span class="checkmark"></span>
+              </label>
+              <label class="container">15 Minutes
+                <input type="radio" id="time3" name="time" onclick="set15Min()">
+                <span class="checkmark"></span>
+              </label>
+          </div>
+        
+          <div class="buttons" id="countdownControl">
+            <button onclick="start()" class="start">
+              Launch
+            </button>
+            <button onclick="stop()" class="stop" hidden=true>
+              Stop
+            </button>
+            <button onclick="reset()" class="reset">
+              Reset
+            </button>
+          </div>
         </div>
 
         <div hidden=true>

@@ -19,12 +19,14 @@ var timeLeft = TIME_LIMIT;
 var timerInterval = null;
 var app = null;
 
+document.getElementById("countdownRunnerControler").hidden = true;
+
 (function initialize(){
     app = new window.Webex.Application();
     app.onReady().then(() => 
     {
-        document.body.hidden = false
         log('onReady()', {message:'app is ready'});
+        document.getElementById("countdownRunnerControler").hidden = false;
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const countdowntime = urlParams.get('countdowntime');
