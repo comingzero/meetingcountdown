@@ -50,6 +50,7 @@ document.getElementById("countdownRunnerControler").hidden = true;
                 } 
                 else
                 {
+                    TIME_LIMIT = 300
                     showHostSetup();
                 }
             });
