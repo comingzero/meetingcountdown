@@ -21,15 +21,20 @@ var app = null;
 
 document.getElementById("countdownRunnerControler").hidden = true;
 
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const countdowntime = urlParams.get('countdowntime');
+if (typeof countdowntime === 'undefined' || countdowntime === null) 
+{
+    TIME_LIMIT = countdowntime;
+}
+
 (function initialize(){
     app = new window.Webex.Application();
     app.onReady().then(() => 
     {
         log('onReady()', {message:'app is ready'});
         document.getElementById("countdownRunnerControler").hidden = false;
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const countdowntime = urlParams.get('countdowntime');
         if (typeof countdowntime === 'undefined' || countdowntime === null) 
         {
             launchHostSetup();
